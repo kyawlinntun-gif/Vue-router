@@ -4,15 +4,16 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
+                        <div class="alert alert-danger" v-if="message">{{ message }}</div>
                         <h1>Login</h1>
-                        <form>
+                        <form @submit.prevent="loginMethod">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Email">
+                                <input type="text" class="form-control" placeholder="Email" v-model="login.email">
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control" placeholder="Password">
+                                <input type="password" class="form-control" placeholder="Password" v-model="login.password">
                             </div>
-                            <button class="form-control btn btn-primary">Login</button>
+                            <button class="form-control btn btn-primary" type="submit">Login</button>
                         </form>
                     </div>
                     <div class="card-footer">
@@ -26,6 +27,28 @@
 
 <script>
 export default {
-    name: 'Login'
+    name: 'Login',
+    data() {
+        return {
+            login: {
+                email: '',
+                password: ''
+            },
+            message: ''
+        }
+    },
+    methods: {
+        loginMethod() {
+            if(this.login.email === 'admin@admin.com' && this.login.password === '123456')
+            {
+                localStorage.setItem('auth', this.login.email);
+                this.$router.push('/profile');
+            }
+            else
+            {
+                this.message = 'Email or Password is incorrect.';
+            }
+        }
+    }
 }
 </script>

@@ -1,18 +1,17 @@
 <template>
     <div>
         <MenuBar />
-        <Profile />
+        <router-view></router-view>
     </div>
 </template>
 
 <script>
 import MenuBar from './components/MenuBar.vue';
-import Profile from '@/views/Profile.vue';
 
 export default {
     name: 'App',
     components: {
-        MenuBar, Profile
+        MenuBar
     }
 }
 </script>
